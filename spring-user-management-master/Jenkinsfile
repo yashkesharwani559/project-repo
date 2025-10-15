@@ -8,17 +8,23 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh './mvnw clean package'
+                dir('spring-user-management-master') {
+                    sh './mvnw clean package'
+                }
             }
         }
         stage('Test') {
             steps {
-                sh './mvnw test'
+                dir('spring-user-management-master') {
+                    sh './mvnw test'
+                }
             }
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t authorization-app .'
+                dir('spring-user-management-master') {
+                    sh 'docker build -t authorization-app .'
+                }
             }
         }
     }
